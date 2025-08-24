@@ -1,20 +1,24 @@
 import React, { useRef, useState } from 'react'
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
+import Sidebar from './sidebar';
 
 function Header() {
-   const btnRef = useRef();
+    const btnRef = useRef();
     const [navopen, setnavopen] = useState(false);
     return (
         <header className="w-full h-20 fixed top-0 left-0 flex 
-    items-center z-40 ">
+    items-center z-40 bg-[#1a182d]">
 
             <div className="max-w-screen-2xl w-full mx-auto px-4 flex justify-between
      items-center md:px-6 " >
 
                 {/* logo */}
-                <h1 className='text-white'>logo</h1>
-                
+                <h1 className="flex space-x-3">
+                       <Sidebar />
+                    <div className="font-bold md:text-3xl text-2xl  text-indigo-300 ">StackLens </div>
+                  </h1>
+
                 {/* navbars */}
                 <div className="relative md:justify-self-center">
                     <button ref={btnRef}
@@ -32,9 +36,9 @@ function Header() {
 
                 {/* login */}
 
-                <a 
-                href="/login"
-                className='btn btn-secondary max-md:hidden
+                <a
+                    href="/login"
+                    className='btn btn-secondary max-md:hidden
                 md:justify-end'>login</a>
             </div>
 

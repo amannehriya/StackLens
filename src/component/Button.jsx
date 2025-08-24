@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function PrimaryButton({
     label,
@@ -7,14 +8,15 @@ function PrimaryButton({
     icon,
     href,
 }) {
+ 
     if(href){
 return (
-   <a 
+   <Link
    className={className}
-   href={href}>
+   to={href}>
    {label}
    {icon ? <span className='material-symbols-rounded' aria-hidden="true">{icon}</span>:undefined}
-   </a>
+  </Link>
   )
 
     }else{

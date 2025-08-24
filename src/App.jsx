@@ -4,6 +4,7 @@ import './App.css'
 import HeroSection from './component/Hero'
 import Navbar from './component/Navbar'
 import Header from './component/Header'
+import SearchPage from './component/SearchPage'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
     <>
     <Header />
     <HeroSection />
+    <SearchPage />
     </>
   )
 }

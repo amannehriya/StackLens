@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom';
 
 
 
@@ -36,7 +37,7 @@ function Navbar({ navopen, setnavopen,btnRef }) {
     const navItems = [
         {
             label: 'home',
-            link: '#home',
+            link: '/',
             className: 'nav-link active',
             ref: lastActiveLink
         }, {
@@ -84,13 +85,13 @@ function Navbar({ navopen, setnavopen,btnRef }) {
 
             {
                 navItems.map(({ label, link, className, ref }, key) => (
-                    <a href={link}
+                    <Link to={link}
                         onClick={activeCurrentLink}
                         key={key}
                         className={className}
                         ref={ref}>
                         {label}
-                    </a>
+                    </Link>
                 )
 
                 )

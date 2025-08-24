@@ -20,6 +20,7 @@ export default function HeroSection() {
 
           <PrimaryButton 
           label="Get started"
+          href={"/search"}
           className="bg-indigo-500 hover:bg-indigo-600 transition-all 
           duration-200 ease-in text-white px-6 py-3 rounded-lg text-lg shadow-md">
          </PrimaryButton>
