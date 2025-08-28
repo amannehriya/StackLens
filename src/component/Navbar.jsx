@@ -1,17 +1,18 @@
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom';
-
+import React, { useContext, useEffect, useRef } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from './context/AuthContext';
 
 
 function Navbar({ navopen, setnavopen,btnRef }) {
     const activeBox = useRef();
     const lastActiveLink = useRef();
     const navRef = useRef();
-
+const { SetIsAuthenticated, isAuthenticated, myData } = useContext(AuthContext)
+const navigate = useNavigate();
 
     //removing navbar when click outside the navbar
     useEffect(() => {
-        console.log(window.innerWidth)
         function handleClickOutside(event) {
             if (
                 navopen &&
@@ -34,7 +35,46 @@ function Navbar({ navopen, setnavopen,btnRef }) {
 
 
 
-    const navItems = [
+
+
+const handleLogout = ()=>{
+    fetch('http://localhost:3000/user/logout',{
+        credentials:'include'
+    }).then(res=>{
+        SetIsAuthenticated(false)
+        toast("logout successful")
+        console.log("user logout",res.clone().json())
+    })
+    .catch((err)=>{
+        console.log("error while logout",err)
+    })
+
+    navigate('/user/login');
+}
+
+    const initActiveBox = () => {
+        activeBox.current.style.top = lastActiveLink.current.offsetTop + 'px';
+        activeBox.current.style.left = lastActiveLink.current.offsetLeft + 'px';
+        activeBox.current.style.width = lastActiveLink.current.offsetWidth + 'px';
+        activeBox.current.style.height = lastActiveLink.current.offsetHeight + 'px';
+
+    }
+
+    useEffect(initActiveBox, []);
+    window.addEventListener('resize', initActiveBox);
+
+    const activeCurrentLink = (event) => {
+
+        lastActiveLink.current?.classList.remove('active');
+        event.target.classList.add('active');
+        lastActiveLink.current = event.target;
+
+        activeBox.current.style.top = event.target.offsetTop + 'px';
+        activeBox.current.style.left = event.target.offsetLeft + 'px';
+        activeBox.current.style.width = event.target.offsetWidth + 'px';
+        activeBox.current.style.height = event.target.offsetHeight + 'px';
+    }
+        const navItems = [
         {
             label: 'home',
             link: '/',
@@ -52,44 +92,21 @@ function Navbar({ navopen, setnavopen,btnRef }) {
 
     ]
 
-
-
-    const initActiveBox = () => {
-        activeBox.current.style.top = lastActiveLink.current.offsetTop + 'px';
-        activeBox.current.style.left = lastActiveLink.current.offsetLeft + 'px';
-        activeBox.current.style.width = lastActiveLink.current.offsetWidth + 'px';
-        activeBox.current.style.height = lastActiveLink.current.offsetHeight + 'px';
-
-    }
-
-    const activeCurrentLink = (event) => {
-
-        lastActiveLink.current?.classList.remove('active');
-        event.target.classList.add('active');
-        lastActiveLink.current = event.target;
-
-
-        activeBox.current.style.top = event.target.offsetTop + 'px';
-        activeBox.current.style.left = event.target.offsetLeft + 'px';
-        activeBox.current.style.width = event.target.offsetWidth + 'px';
-        activeBox.current.style.height = event.target.offsetHeight + 'px';
-    }
-
-    useEffect(initActiveBox, []);
-    window.addEventListener('resize', initActiveBox);
+    
     return (
 
         <nav
-            ref={navRef} className={'navbar  ' + (navopen ? "active" : "")
+            ref={navRef} className={'navbar  ' + (navopen ?"active" : "")
             }>
 
             {
                 navItems.map(({ label, link, className, ref }, key) => (
-                    <Link to={link}
+                    <Link
+                    to={link}
+                       className={className}
                         onClick={activeCurrentLink}
                         key={key}
-                        className={className}
-                        ref={ref}>
+                       ref={ref}>
                         {label}
                     </Link>
                 )
@@ -97,13 +114,13 @@ function Navbar({ navopen, setnavopen,btnRef }) {
                 )
             }
             {/* for login */}
-            <a href={"login"}
-                onClick={activeCurrentLink}
+            <button
+                onClick={handleLogout}
                 className=" flex md:hidden  items-center h-9 px-4 font-medium tracking-wide
 text-zinc-50/50 hover:text-zinc-50 transition-colors"
             >
-                Login
-            </a>
+               Logout
+            </button>
 
             <div className="absolute   bg-zinc-50
   rounded-lg -z-10 transition-[top,left] duration-500"

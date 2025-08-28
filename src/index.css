@@ -32,3 +32,5 @@ text-zinc-50/50 hover:text-zinc-50 transition-colors
   @apply absolute   bg-zinc-50
   rounded-lg -z-10 transition-[top,left] duration-500
 }
+
+

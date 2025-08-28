@@ -1,7 +1,44 @@
 import React from "react";
 import { PrimaryButton } from "./Button";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+import { useEffect } from "react";
 
 export default function HeroSection() {
+  
+const {data,setData,myData,loading,SetIsAuthenticated,setLoading} = useContext(AuthContext);
+      const token = async()=>{
+        
+          await fetch('http://localhost:3000/user/profile',{
+          credentials:'include',
+          method:'GET'
+         }).then(res=>{
+          // console.log(res.clone().json())
+          return res.json()})
+         .then(data=>{
+          if(data.status){
+              // console.log("auth",data)
+              setData(data.data)
+              SetIsAuthenticated(data.status)
+              // console.log("data in authcontext",data);
+              setLoading(false)
+          }else{
+              SetIsAuthenticated(false)
+          }
+         }).catch((err)=>{
+          setLoading(false);
+          console.log('error while fetching profile data',err)
+         })
+      }
+  
+      useEffect(()=>{
+         token();
+      },[])
+  
+ myData.name = data?.username;
+ myData.email = data?.email;
+ myData.id = data?._id;
+  
   return (
     <div className="relative  bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] text-white min-h-screen flex flex-col">
     

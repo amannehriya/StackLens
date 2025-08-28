@@ -17,7 +17,7 @@ export default function CompanyDetailsPage() {
     .then(({message,data})=>{
       
        setCompany(data)
-       console.log(data)
+      //  console.log(data)
      })
   },[])
 const logoUrl = useBufferImage(company?.logo || null)

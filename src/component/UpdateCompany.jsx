@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { AuthContext } from "./context/AuthContext";
+import React, { useContext, useEffect, useState } from "react";
+import {  useNavigate, useParams } from "react-router-dom";
 
-export default function AddCompany() {
-  const {myData} = useContext(AuthContext);
-  const id = myData.id;
 
-let  navigate = useNavigate();
+export default function UpdateCompany() {
+  
+    const {id} = useParams();
+    const navigate = useNavigate();
+    // my_data.id = user id
+    // id= postid
   const [formData, setFormData] = useState({
     name: "",
     languages: "",
@@ -20,6 +21,23 @@ let  navigate = useNavigate();
     logo: ""
   });
 
+  useEffect(()=>{
+    
+    const fetchData = async()=>{
+try {
+    await fetch(`http://localhost:3000/company/${id}`)
+.then(res=>res.json())
+.then(data=>setFormData(data.data))
+
+} catch (error) {
+    console.log("failed to fetch",error)
+}
+  }
+  fetchData();
+},[id])
+
+
+
   const handleChange =  (e) => {
     const { name, value, type, checked,files } = e.target;
     setFormData((prev) => ({
@@ -31,33 +49,24 @@ let  navigate = useNavigate();
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    // Transform languages from comma-separated string to array
-    // const company = {
-    //   name: formData.name,
-    //   languages: formData.languages.split(",").map((lang) => lang.trim()),
-    //   salary: {
-    //     fresher: Number(formData.fresherSalary),
-    //     experienced: Number(formData.experiencedSalary)
-    //   },
-    //   jobAvailability: formData.jobAvailability,
-    //   minKnowledge: formData.minKnowledge,
-    //   location: formData.location,
-    //   companySize: formData.companySize,
-    //   website: formData.website,
-    //   logo: formData.logo
-    // };
 const formDataToSend = new FormData();
 
   formDataToSend.append("name", formData.name);
+ 
   formDataToSend.append(
-    "languages",
-   JSON.stringify( formData.languages.split(",").map((lang) => lang.trim()))
-  );
+  "languages",
+  JSON.stringify(
+    Array.isArray(formData.languages)
+      ? formData.languages
+      : formData.languages.split(",").map((lang) => lang.trim())
+  )
+);
+
   formDataToSend.append(
     "salary",
     JSON.stringify({
-      fresher: Number(formData.fresherSalary),
-      experienced: Number(formData.experiencedSalary),
+      fresher: Number(formData.fresherSalary || formData.salary?.fresher),
+      experienced: Number(formData.experiencedSalary || formData.salary?.experienced),
     })
   );
   formDataToSend.append("jobAvailability", formData.jobAvailability);
@@ -72,19 +81,24 @@ const formDataToSend = new FormData();
 
 
 
+    // console.log("New Company:", company);
+
     // TODO: send this data to backend via fetch/axios
 
     try {
-    const res = await fetch(`http://localhost:3000/company/create/${id}`, {
-      method: "POST",
-      credentials:'include',  //means ye jo hm request bhej rhe he uske sath hm cookie bhi bhrj kr rhe he
-                            //kyunk ye protected route he isliye is pr middleware lga hua he isloggedin ka
+    const res = await fetch(`http://localhost:3000/company/update/${id}`, {
+      method: "PUT",
+      credentials:'include',
       body:formDataToSend
     });
 
     const data = await res.json();
-    console.log("✅ Company Created:", data);
-   data.status ? navigate(`/company/${data.data._id}`) : alert(data.error)
+    // console.log("✅ Company Created:",data);
+
+     (data.status) ? 
+     navigate(`/company/${id}`):alert("data.message")
+
+
   } catch (error) {
     console.error("❌ Error creating company:", error);
   }
@@ -99,7 +113,7 @@ const formDataToSend = new FormData();
     onSubmit={handleSubmit}
     className="bg-white/10 backdrop-blur-md rounded-2xl shadow-lg p-6 w-full max-w-4xl space-y-6"
   >
-    <h2 className="text-2xl font-bold text-center mb-4">Create New Company</h2>
+    <h2 className="text-2xl font-bold text-center mb-4">update Company</h2>
 
     {/* Grid Wrapper */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -122,7 +136,7 @@ const formDataToSend = new FormData();
         <input
           type="text"
           name="languages"
-          value={formData.languages}
+          value={formData.languages }
           onChange={handleChange}
           placeholder="e.g. JavaScript, Node.js, React"
           className="w-full px-3 py-2 rounded-lg bg-white/20 focus:outline-none"
@@ -134,9 +148,10 @@ const formDataToSend = new FormData();
       <div>
         <label className="block text-sm mb-1">Fresher Salary</label>
         <input
+        // placeholder={formData.salary?.fresher}
           type="number"
           name="fresherSalary"
-          value={formData.fresherSalary}
+          value={formData.fresherSalary || formData.salary?.fresher}
           onChange={handleChange}
           className="w-full px-3 py-2 rounded-lg bg-white/20 focus:outline-none"
           required
@@ -147,7 +162,8 @@ const formDataToSend = new FormData();
         <input
           type="number"
           name="experiencedSalary"
-          value={formData.experiencedSalary}
+          // placeholder={formData.salary?.experienced}
+          value={formData.experiencedSalary || formData.salary?.experienced}
           onChange={handleChange}
           className="w-full px-3 py-2 rounded-lg bg-white/20 focus:outline-none"
           required
@@ -211,7 +227,7 @@ const formDataToSend = new FormData();
         <input
           type="url"
           name="website"
-          value={formData.website}
+          value={formData.website?formData.website: ""}
           onChange={handleChange}
           className="w-full px-3 py-2 rounded-lg bg-white/20 focus:outline-none"
         />
@@ -238,7 +254,7 @@ const formDataToSend = new FormData();
       Create Company
     </button>
   </form>
-</div>
+n</div>
 
   );
 }
