@@ -82,7 +82,7 @@ const handleLogout = ()=>{
             ref: lastActiveLink
         }, {
             label: 'About',
-            link: '#about', //#about dalne se jese hi hm about pr click krenge to vo hmko about vale component pr lejayega
+            link: '/about', //#about dalne se jese hi hm about pr click krenge to vo hmko about vale component pr lejayega
             className: 'nav-link ',//nut make sure aapne us component ko ek section div me likh kr use id di ho eg:id="work"
         }, {
             label: 'Work',

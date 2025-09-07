@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, Home, Search, PlusCircle, BarChart, Settings,Building2  } from "lucide-react";
+import { Menu, X, Home, Search, PlusCircle,User, BarChart, Settings,Building2  } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -48,6 +48,7 @@ export default function Sidebar() {
         <nav className="mt-6 space-y-2 px-4">
           <SidebarItem icon={<Home size={18} />} label="Dashboard" href="/" />
           <SidebarItem icon={<Search size={18} />} label="Search Companies" href="/search" />
+          <SidebarItem icon={<User size={18}/>} label="My-Profile" href="/userProfile" />
           <SidebarItem icon={<PlusCircle size={18} />} label="Add Company" href="/company/add" />
           <SidebarItem icon={<Building2 size={20} />} label="My-Company" href="/mycompany"/>
           <SidebarItem icon={<BarChart size={18} />} label="Group / Reports" />

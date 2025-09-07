@@ -1,11 +1,27 @@
 import React, { useRef, useState } from 'react'
 import Navbar from './Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from './sidebar';
 
 function Header() {
+    const navigate = useNavigate(); 
     const btnRef = useRef();
     const [navopen, setnavopen] = useState(false);
+    const handleLogout = () => {
+        fetch('http://localhost:3000/user/logout', {
+            credentials: 'include'
+        }).then(res => {
+            SetIsAuthenticated(false)
+            toast("logout successful")
+            console.log("user logout", res.clone().json())
+        })
+            .catch((err) => {
+                console.log("error while logout", err)
+            })
+
+        navigate('/user/login');
+    }
+
     return (
         <header className="w-full h-20 fixed top-0 left-0 flex 
     items-center z-40 bg-[#1a182d]">
@@ -15,9 +31,9 @@ function Header() {
 
                 {/* logo */}
                 <h1 className="flex space-x-3">
-                       <Sidebar />
-                    <div className="font-bold md:text-3xl text-2xl  text-indigo-300 ">StackLens </div>
-                  </h1>
+                    <Sidebar />
+                    <div className="font-bold md:text-3xl text-2xl headline-1  ">StackLens </div>
+                </h1>
 
                 {/* navbars */}
                 <div className="relative md:justify-self-center">
@@ -36,10 +52,10 @@ function Header() {
 
                 {/* login */}
 
-                <a
-                    href="/login"
+                <button
+                    onClick={handleLogout}
                     className='btn btn-secondary max-md:hidden
-                md:justify-end'>login</a>
+                md:justify-end'>Logout</button>
             </div>
 
 

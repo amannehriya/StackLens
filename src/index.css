@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Register the scrollbar plugin for v4 */
+/* @plugin 'tailwind-scrollbar'; */
+
+html{
+  scroll-behavior: smooth;
+}
+
 .btn{
 @apply max-w-max  h-9  items-center gap-2 px-4 py-2 rounded-xl
 font-medium text-sm ring-1 ring-zinc-50/5 ring-inset 
@@ -34,3 +41,16 @@ text-zinc-50/50 hover:text-zinc-50 transition-colors
 }
 
 
+.headline-1{
+  /* with the help of this we are giving shading effect to our test */
+  @apply max-w-max;
+  background:-webkit-linear-gradient(0deg,#fafafa,#3b3b7e);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color: transparent;
+}
+.headline-2{
+  @apply text-5xl leading-tight font-semibold lg:text-[55px]
+  lg:leading-[1.15]
+}
+
+/* 0deg,#fafafa,#a1a1aa */

@@ -14,7 +14,9 @@ import UpdateCompany from './component/UpdateCompany.jsx'
 import LoginPage from './component/LoginPage.jsx'
 import { AuthProvider } from './component/context/AuthContext.jsx'
 import ProtectedRoute from './component/ProtectedRoute.jsx'
-
+import AuthHandle from './component/authHandle.jsx'
+import UserProfile from './component/UserProfile.jsx'
+import SendResumeForm from './component/SendResumeForm.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,15 +26,18 @@ const router = createBrowserRouter(
     <Route element={<ProtectedRoute />} >
         <Route path='/' element={<Layout />}>
           <Route path='' element={<HeroSection />} />
-          <Route path='about' element={<About />} />
+          <Route path='/about' element={<About />} />
           <Route path='/search' element={<SearchPage />} />
           <Route path='/company/:id' element={<CompanyDetailsPage />} />
           <Route path='/company/add' element={<AddCompany />} />
           <Route path='/mycompany' element={<CompanyList />} />
           <Route path='/company/update/:id' element={<UpdateCompany />} />
+          <Route path='/userProfile' element={<UserProfile />} />
+          <Route path='/company/contact' element={<SendResumeForm />} />
         </Route>
         
       </Route>
+      <Route path='/google/authHandle' element={<AuthHandle/>} />
     <Route path='/user/login' element={<LoginPage />} />
 </>
 

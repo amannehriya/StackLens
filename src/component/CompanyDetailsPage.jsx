@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useBufferImage from "../hooks/useBufferImage";
-
+import Loading from "./utils/Loading";
 
 export default function CompanyDetailsPage() {
 
-  const {id} = useParams();
-  
+  const { id } = useParams();
+
   // console.log(id)
-  const [company,setCompany] = useState(null);
+  const [company, setCompany] = useState(null);
+  const [loading,setLoading] = useState(true);
+  const navigate = useNavigate();
 
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:3000/company/${id}`)
-    .then(res=>res.json())
-    .then(({message,data})=>{
-      
-       setCompany(data)
-      //  console.log(data)
-     })
-  },[])
-const logoUrl = useBufferImage(company?.logo || null)
-// console.log(logoUrl)
- if(!company){
-    //if we are not adding this then it will give error becoz fetch async event he and detail laane me time lgta he
-    return <div>loading..</div> //until the compnay detail is not fetch it will show loading page
-  }
-  
+      .then(res => res.json())
+      .then(({ message, data }) => {
+
+        setCompany(data);
+        setLoading(false);
+        //  console.log(data)
+      })
+  }, [])
+  const logoUrl = useBufferImage(company?.logo || null)
+  // console.log(logoUrl)
   return (
+    loading ? <Loading /> :
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] text-white">
- 
+
       {/* Card */}
       <main className="max-w-5xl mx-auto px-6 pb-16 pt-25">
         <div className="relative rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl">
@@ -38,20 +37,22 @@ const logoUrl = useBufferImage(company?.logo || null)
 
           <div className="px-6 md:px-10 -mt-12 pb-8">
             {/* Logo & Title row */}
-            <div className="flex items-center gap-5">
-               <img
-               src={logoUrl}
+            <div className="  flex items-center gap-5  ">
+
+              <img
+                src={logoUrl}
                 alt={`${company.name} logo`}
-                className="w-24 h-24 rounded-2xl object-cover ring-4 ring-black/30"
+                className="w-24 h-24 rounded-2xl  object-fill  ring-4 ring-black/30"
               />
-             
+
+
               <div className="flex-1">
                 <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
                   {company.name}
                 </h1>
                 <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
-                  <span className={company.jobAvailability ? "px-2.5 py-1 rounded-full  bg-emerald-500/20 text-emerald-200 border border-emerald-400/30":
-                                          "bg-red-500/40 text-red-50 border-red-300/10 px-2.5 py-1 rounded-full "}>
+                  <span className={company.jobAvailability ? "px-2.5 py-1 rounded-full  bg-emerald-500/20 text-emerald-200 border border-emerald-400/30" :
+                    "bg-red-500/40 text-red-50 border-red-300/10 px-2.5 py-1 rounded-full "}>
                     {company.jobAvailability ? "Hiring" : "Not Hiring"}
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-white/10 text-gray-200 border border-white/15">
@@ -135,18 +136,13 @@ const logoUrl = useBufferImage(company?.logo || null)
                 <div className="text-gray-400">Company Size</div>
                 <div className="font-medium">{company.companySize}</div>
               </div>
+
               <div className="rounded-xl bg-white/5 border border-white/10 p-4 ring-2 ring-transparent hover:ring-indigo-500
-            transition-all duration-300 ease-in-out hover:text-white">
+            transition-all duration-300 ease-in-out hover:text-white "
+            onClick={()=>{navigate("/company/contact")}}>
 
                 <div className="text-gray-400 cursor-pointer ">contact now..</div>
-                <a
-                  className="font-medium text-indigo-300 hover:text-indigo-200 break-all"
-                  href={company.website}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {company.website}
-                </a>
+               
               </div>
             </div>
           </div>
@@ -157,3 +153,4 @@ const logoUrl = useBufferImage(company?.logo || null)
     </div>
   );
 }
+

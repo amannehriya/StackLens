@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import Loading from "./utils/Loading";
 
 
 import CompanyCard from "./CompanyCard";
+import { AuthContext } from "./context/AuthContext";
 
 export default function CompanyList() {
-    const name = 'aman'
+    const {myData} = useContext(AuthContext);
+    const id = myData.id;
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -14,7 +16,7 @@ export default function CompanyList() {
       useEffect(() => {
         const fetchCompanies = async () => {
           try {
-            const res = await fetch("http://localhost:3000/company/companyList/68ac2775406104bdf94c12dd");
+            const res = await fetch(`http://localhost:3000/company/companyList/${id}`);
             const data = await res.json();
             // console.log(data.companylist)
             setCompanies(data.companylist);
@@ -31,11 +33,12 @@ export default function CompanyList() {
  
 
     return (
-        <div className="min-h-screen mt-20 bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] space-y-5 p-6">
-            <h1 className="text-3xl font-bold text-white mb-6 md:ml-40">📂 Companies</h1>
+       loading ? <Loading/>:
+        <div className="min-h-screen mt-20 bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] md:flex md:items-center md:flex-col space-y-5 p-6">
+            <h1 className="text-3xl font-bold text-white mb-6 ">📂 Companies</h1>
 
             {companies.length === 0 ? (
-                <p className="text-gray-400">No companies created yet.</p>
+                <p className="text-gray-400  md:self-center">No companies created yet.</p>
             ) : (
                 companies.map((company,key)=>(
                   <CompanyCard company={company} key={key} />
