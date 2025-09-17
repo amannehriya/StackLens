@@ -21,9 +21,9 @@ import SendResumeForm from './component/SendResumeForm.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-    
 
-    <Route element={<ProtectedRoute />} >
+
+      <Route element={<ProtectedRoute />} >
         <Route path='/' element={<Layout />}>
           <Route path='' element={<HeroSection />} />
           <Route path='/about' element={<About />} />
@@ -35,13 +35,13 @@ const router = createBrowserRouter(
           <Route path='/userProfile' element={<UserProfile />} />
           <Route path='/company/contact' element={<SendResumeForm />} />
         </Route>
-        
-      </Route>
-      <Route path='/google/authHandle' element={<AuthHandle/>} />
-    <Route path='/user/login' element={<LoginPage />} />
-</>
 
-     
+      </Route>
+      <Route path='/google/authHandle' element={<AuthHandle />} />
+      <Route path='/user/login' element={<LoginPage />} />
+    </>
+
+
   )
 )
 
@@ -49,8 +49,8 @@ createRoot(document.getElementById('root')).render(
 
   <StrictMode>
 
-   <AuthProvider>
+    <AuthProvider>
       <RouterProvider router={router} />
-</AuthProvider>
+    </AuthProvider>
   </StrictMode>,
 )

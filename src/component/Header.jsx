@@ -8,7 +8,7 @@ function Header() {
     const btnRef = useRef();
     const [navopen, setnavopen] = useState(false);
     const handleLogout = () => {
-        fetch('http://localhost:3000/user/logout', {
+        fetch(`${import.meta.env.VITE_BASE_URL}/user/logout`, {
             credentials: 'include'
         }).then(res => {
             SetIsAuthenticated(false)

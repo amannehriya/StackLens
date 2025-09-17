@@ -14,7 +14,7 @@ export default function UserProfile() {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:3000/user/myProfile", {
+      fetch(`${import.meta.env.VITE_BASE_URL}/user/myProfile`, {
         credentials: 'include'
       })
         .then(res => res.json())
@@ -24,7 +24,7 @@ export default function UserProfile() {
             name: data.username,
             email: data.email,
             profilePic: data.profilePic || null,
-            phoneNumber: data.phoneNumber || "not mentioned",
+            phoneNumber: data?.phoneNumber || '123456789',
             location: data.location || "not mentioned"
           })
           setImage(data.profilePic || null)
@@ -66,7 +66,7 @@ export default function UserProfile() {
     formDataToSend.append("profilePic", profile.profilePic);
 
 
-    await fetch(`http://localhost:3000/user/myprofile/${id}`, {
+    await fetch(`${import.meta.env.VITE_BASE_URL}/user/myprofile/${id}`, {
       method: 'POST',
       credentials: 'include',
       body: formDataToSend
@@ -74,6 +74,7 @@ export default function UserProfile() {
       .then(res => res.json())
       .then(data => {
         if (data.status) {
+          console.log("ohk")
           setProfile(data.data);
           setImage(data.data.profilePic);
         } else{

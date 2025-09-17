@@ -75,7 +75,7 @@ const formDataToSend = new FormData();
     // TODO: send this data to backend via fetch/axios
 
     try {
-    const res = await fetch(`http://localhost:3000/company/create/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/company/create/${id}`, {
       method: "POST",
       credentials:'include',  //means ye jo hm request bhej rhe he uske sath hm cookie bhi bhrj kr rhe he
                             //kyunk ye protected route he isliye is pr middleware lga hua he isloggedin ka
@@ -197,7 +197,7 @@ const formDataToSend = new FormData();
           name="companySize"
           value={formData.companySize}
           onChange={handleChange}
-          className="w-full px-3 py-2 rounded-lg bg-white/20 focus:outline-none"
+          className="w-full px-3 py-2 open:text-black rounded-lg bg-white/20 focus:outline-none"
         >
           <option>Startup</option>
           <option>Mid-size</option>

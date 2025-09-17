@@ -14,7 +14,7 @@ export default function CompanyDetailsPage() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/company/${id}`)
+    fetch(`${import.meta.env.VITE_BASE_URL}/company/${id}`)
       .then(res => res.json())
       .then(({ message, data }) => {
 

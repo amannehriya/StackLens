@@ -36,9 +36,7 @@ export default function LoginPage() {
     }
 
     try {
-      const res = await fetch(
-       
-        `http://localhost:3000/user/${isLogin ? "login" : "register"}`,
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/user/${isLogin ? "login" : "register"}`,
         {
           method: "POST",
           credentials: "include",
@@ -52,7 +50,7 @@ export default function LoginPage() {
       );
  console.log(isLogin)
       if (!res.clone().ok) {
-        toast("inavalid credentials")
+        // toast("inavalid credentials")
         throw new Error(res.clone().json().error || "Something went wrong");
       }
 
@@ -70,7 +68,7 @@ export default function LoginPage() {
 
   const handleGoogleAuth = async()=>{
     try {
-      window.location.href = "http://localhost:3000/auth/google";
+      window.location.href = `${import.meta.env.VITE_BASE_URL}/auth/google`;
 
 
 
@@ -97,7 +95,7 @@ export default function LoginPage() {
       <div className="  relative flex items-center justify-center min-h-screen bg-gradient-to-b from-black to-neutral-900">
 <Logo />
         <div className="w-full max-w-md bg-neutral-950 p-6 rounded-2xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-white mb-4 text-center">
+          <h2 className="text-2xl font-semibold text-white mt-15 mb-4 text-center">
             {isLogin ? "Login" : "Register"}
           </h2>
 
@@ -187,9 +185,9 @@ export default function LoginPage() {
               {isLogin ? "Register" : "Login"}
             </button>
           </p>
-          <p className="text-gray-400 text-sm text-center mt-4">
+          <p className="text-gray-400 text-sm text-center mt-4 ">
             <button
-            className="hover-underline"
+            className="hover:underline cursor-pointer"
             onClick={handleGoogleAuth}>
         Continue with google ?
             </button>

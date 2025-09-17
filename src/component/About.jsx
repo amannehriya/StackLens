@@ -3,7 +3,7 @@ import React from "react";
 export default function About() {
   return (
     <div id="about" className="bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] text-gray-300 min-h-screen py-16 px-6 mt-20">
-      <div className="max-w-6xl mx-auto space-y-16">
+      <div className="max-w-6xl mx-auto space-y-20">
         
         {/* Company Intro */}
        <section className="text-center space-y-4">
@@ -38,7 +38,7 @@ export default function About() {
 
         {/* Projects Showcase */}
         <section>
-          <h2 className="text-3xl  font-bold text-white text-center mb-8">Our Projects</h2>
+          <h2 className="text-3xl  font-bold text-white text-center mb-10">Our Projects</h2>
           <div className="grid md:grid-cols-3 gap-10">
             {/* Project 1 */}
             <div className="bg-[#1e1b4b] rounded-xl shadow-lg overflow-hidden hover:scale-105 transform transition duration-300">

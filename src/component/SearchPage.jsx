@@ -12,7 +12,7 @@ export default function SearchPage() {
   useEffect(()=>{
 const delaybounce = setTimeout(()=>{
   if(query.trim()){
-    fetch(`http://localhost:3000/search/?query=${query}`)
+    fetch(`${import.meta.env.VITE_BASE_URL}/search/?query=${query}`)
     .then(res=>res.json())
     .then(data=>{
       return setResult(data)});
@@ -26,13 +26,7 @@ const delaybounce = setTimeout(()=>{
 return ()=>clearTimeout(delaybounce);
   },[query])
 
-  // const companies = [
-  //   { name: "Netflix", logo: "https://cdn-icons-png.flaticon.com/512/732/732228.png" },
-  //   { name: "Dropbox", logo: "https://cdn-icons-png.flaticon.com/512/5968/5968753.png" },
-  //   { name: "Spotify", logo: "https://cdn-icons-png.flaticon.com/512/2111/2111624.png" },
-  //   { name: "Reddit", logo: "https://cdn-icons-png.flaticon.com/512/2111/2111589.png" },
-  // ];
-  
+
 
   return (
     <div className="pt-15 md:pt-25 min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] text-white">

@@ -16,7 +16,7 @@ export default function CompanyList() {
       useEffect(() => {
         const fetchCompanies = async () => {
           try {
-            const res = await fetch(`http://localhost:3000/company/companyList/${id}`);
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/company/companyList/${id}`);
             const data = await res.json();
             // console.log(data.companylist)
             setCompanies(data.companylist);

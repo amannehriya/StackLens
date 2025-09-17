@@ -25,7 +25,7 @@ export default function UpdateCompany() {
     
     const fetchData = async()=>{
 try {
-    await fetch(`http://localhost:3000/company/${id}`)
+    await fetch(`${import.meta.env.VITE_BASE_URL}/company/${id}`)
 .then(res=>res.json())
 .then(data=>setFormData(data.data))
 
@@ -86,7 +86,7 @@ const formDataToSend = new FormData();
     // TODO: send this data to backend via fetch/axios
 
     try {
-    const res = await fetch(`http://localhost:3000/company/update/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/company/update/${id}`, {
       method: "PUT",
       credentials:'include',
       body:formDataToSend

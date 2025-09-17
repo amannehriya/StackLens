@@ -21,7 +21,7 @@ function SendResumeForm({ companyEmail="amannehriya19@gmail.com" }) {
     formData.append("applicantEmail", email);
  
     setLoading(true);
-    const res = await fetch("http://localhost:3000/comunication/send-resume", {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/comunication/send-resume`, {
       method: "POST",
       body: formData,
       credentials:'include'
