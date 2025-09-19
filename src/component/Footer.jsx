@@ -9,7 +9,7 @@ export default function Footer() {
         
         {/* Company Info */}
         <div>
-          <h2 className="text-white font-bold text-xl">StackSight</h2>
+          <h2 className="text-white font-bold text-xl">StackLens</h2>
           <p className="text-sm mt-2 text-gray-400">
             Empowering developers with insights and tools to build scalable applications.
           </p>
@@ -21,8 +21,8 @@ export default function Footer() {
           <ul className="space-y-2">
             <li><Link to="" className="hover:text-white">Home</Link></li>
             <li><Link to="/about" className="hover:text-white">About</Link></li>
-            <li><Link to="/services" className="hover:text-white">Services</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+            <li><Link to="" className="hover:text-white">Services</Link></li>
+            <li><Link to="" className="hover:text-white">Contact</Link></li>
           </ul>
         </div>
 
@@ -31,7 +31,7 @@ export default function Footer() {
           <h3 className="text-white font-semibold mb-3">Contact Us</h3>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
-              <Mail size={16} /> support@stacksight.com
+              <Mail size={16} /> support@stacklens.com
             </li>
             <li className="flex items-center gap-2">
               <Phone size={16} /> +1 (234) 567-890
@@ -61,7 +61,7 @@ export default function Footer() {
 
       {/* Bottom Copyright */}
       <div className="text-center text-gray-500 text-sm mt-10 border-t border-gray-700 pt-5">
-        © {new Date().getFullYear()} StackSight. All rights reserved.
+        © {new Date().getFullYear()} StackLens. All rights reserved.
       </div>
     </footer>
   );

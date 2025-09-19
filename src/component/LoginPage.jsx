@@ -3,10 +3,11 @@ import { AuthContext } from "./context/AuthContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Logo from "./utils/Logo";
-
+import Loading from "./utils/Loading";
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);  //for checking user wants to login or register
   const [error, setError] = useState("");
+  const [loading,setLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email:"",
@@ -36,6 +37,7 @@ export default function LoginPage() {
     }
 
     try {
+      setLoading(true);
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/user/${isLogin ? "login" : "register"}`,
         {
           method: "POST",
@@ -63,6 +65,8 @@ export default function LoginPage() {
 
     } catch (err) {
       setError(err.message);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -91,7 +95,7 @@ export default function LoginPage() {
 
   return (
     <>
-     
+   { loading &&( <Loading />)}
       <div className="  relative flex items-center justify-center min-h-screen bg-gradient-to-b from-black to-neutral-900">
 <Logo />
         <div className="w-full max-w-md bg-neutral-950 p-6 rounded-2xl shadow-lg">

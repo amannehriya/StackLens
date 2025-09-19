@@ -2,17 +2,22 @@ import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext';
 
-function SettingMenu({ id }) {
+function SettingMenu({ id,setLoading }) {
     const { myData } = useContext(AuthContext);
     let navigate = useNavigate();
     const handleDelete = async () => {
         try {
-            await fetch(`http://localhost:3000/company/delete/${myData.id}/${id}`, {
+           const res  = await fetch(`${import.meta.env.VITE_BASE_URL}/company/delete/${myData.id}/${id}`, {
                 method: "DELETE"
             });
-            console.log("deleted")
+            console.log("deleted");
+            if(res.ok){
+                alert("deleted successfuly");
+                setLoading(true);
+            }
             // setCompanies((prev) => prev.filter((c) => c._id !== id));
         } catch (error) {
+            alert("error deleting company")
             console.error("❌ Error deleting company:", error);
         }
     };

@@ -3,7 +3,7 @@ import useBufferImage from "../hooks/useBufferImage";
 import SettingMenu from "./utils/SettingMenu";
 import { MoreVertical, Edit, Trash2, Eye } from "lucide-react";
 
-function CompanyCard({company}) {
+function CompanyCard({company ,setLoading}) {
  const [feature, setFeature] = useState(false);
     const featureRef = useRef();
     
@@ -33,12 +33,12 @@ function CompanyCard({company}) {
     const logoUrl = useBufferImage(company?.logo || null)
    
   return (
-      <div className="md:ml-40 bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] p-4 rounded-2xl shadow-lg flex items-center justify-between">
+      <div className="md:ml-40 md:w-2/3 bg-gradient-to-b from-[#0f172a] to-[#1e1b4b]  hover:bg-gradient-to-b hover:from-[#0f172a] hover:to-[#332f6a] p-4 rounded-2xl shadow-lg flex items-center justify-between">
                     {/* Logo + Name */}
                     <div className="flex items-center gap-4">
                         <img
                             src={logoUrl} //logo
-                            alt={`${company.name} logo`}
+                            alt={`${company?.name} logo`}
                             className="w-14 h-14 rounded-xl object-cover border border-white/20"
                         />
                         <h2 className="text-white font-semibold text-lg">{company.name}</h2>
@@ -52,7 +52,7 @@ function CompanyCard({company}) {
                         className="text-white hover:bg-white/10 p-2 rounded-full transition"
                     >
                         <MoreVertical size={20} />
-                        {feature ? <SettingMenu id={company._id}/> : ""}
+                        {feature ? <SettingMenu id={company._id} setLoading={setLoading}/> : ""}
                     </button>
 
                     {/* Settings Dropdown */}

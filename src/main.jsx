@@ -17,6 +17,7 @@ import ProtectedRoute from './component/ProtectedRoute.jsx'
 import AuthHandle from './component/authHandle.jsx'
 import UserProfile from './component/UserProfile.jsx'
 import SendResumeForm from './component/SendResumeForm.jsx'
+import LearnMore from './component/LearnMore.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
           <Route path='' element={<HeroSection />} />
           <Route path='/about' element={<About />} />
           <Route path='/search' element={<SearchPage />} />
+          <Route path='/learn-more' element={<LearnMore />} />
           <Route path='/company/:id' element={<CompanyDetailsPage />} />
           <Route path='/company/add' element={<AddCompany />} />
           <Route path='/mycompany' element={<CompanyList />} />

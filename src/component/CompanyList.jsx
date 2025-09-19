@@ -28,20 +28,20 @@ export default function CompanyList() {
         };
 
         fetchCompanies();
-      }, []);
+      }, [loading]);
 
  
 
     return (
        loading ? <Loading/>:
-        <div className="min-h-screen mt-20 bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] md:flex md:items-center md:flex-col space-y-5 p-6">
+        <div className="min-h-screen mt-20 bg-gradient-to-b from-[#0f172a] to-[#1e1b4b] md:flex md:items-center md:flex-col space-y-10 p-6">
             <h1 className="text-3xl font-bold text-white mb-6 ">📂 Companies</h1>
 
             {companies.length === 0 ? (
                 <p className="text-gray-400  md:self-center">No companies created yet.</p>
             ) : (
                 companies.map((company,key)=>(
-                  <CompanyCard company={company} key={key} />
+                  <CompanyCard company={company} key={key} setLoading={setLoading} />
                 ))
                
             )}

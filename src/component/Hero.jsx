@@ -45,7 +45,7 @@ export default function HeroSection() {
   // 
   return (
     <>
-      <div id="home" className=" relative  bg-gradient-to-b from-[#0f172a] to-[#1e1b4b]
+      <div id="home" className=".scrollbar-hide scrollbar-thin scrollbar-thumb-indigo-600 scrollbar-track-transparent relative  bg-gradient-to-b from-[#0f172a] to-[#1e1b4b]
          text-white min-h-screen flex flex-col">
 
        
@@ -71,6 +71,7 @@ export default function HeroSection() {
 
             <PrimaryButton
               label=" Learn more "
+              href={'/learn-more'}
               icon={"Chevron_Right"}
               className=" z-30 rounded-lg text-gray-200 ring-2 ring-transparent hover:ring-indigo-500
             transition-all duration-300 ease-in-out hover:text-white px-6 py-3 text-lg flex items-center gap-3">

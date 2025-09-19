@@ -91,11 +91,11 @@ export default function About() {
         <section className="text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Technologies We Use</h2>
           <div className="flex flex-wrap justify-center gap-6">
-            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm">React</span>
-            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm">Node.js</span>
-            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm">MongoDB</span>
-            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm">Express</span>
-            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm">Tailwind CSS</span>
+            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm hover:bg-[#312e81] transition-all duration-500 hover:scale-105 ">React</span>
+            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm hover:bg-[#312e81] transition-all duration-500 hover:scale-105">Node.js</span>
+            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm hover:bg-[#312e81] transition-all duration-500 hover:scale-105">MongoDB</span>
+            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm hover:bg-[#312e81] transition-all duration-500 hover:scale-105">Express</span>
+            <span className="bg-[#0f172a] px-4 py-2 rounded-lg shadow text-sm hover:bg-[#312e81] transition-all duration-500 hover:scale-105">Tailwind CSS</span>
           </div>
         </section>
       </div>

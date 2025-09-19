@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 /* Register the scrollbar plugin for v4 */
-/* @plugin 'tailwind-scrollbar'; */
+
 
 html{
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
+  overflow-y: auto !important;
+  scrollbar-width: thin !important; 
+  scrollbar-color: rgba(0, 0, 0, 0.18)!important; /* Firefox thumb/track */
 }
+
+
+
 
 .btn{
 @apply max-w-max  h-9  items-center gap-2 px-4 py-2 rounded-xl
